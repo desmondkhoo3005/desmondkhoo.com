@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Contact Desmond Khoo.">
+  <title>Say Hi — Desmond Khoo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header contact-header">
+    <a class="brand" href="index.html">DESMOND KHOO</a>
+    <nav><a href="index.html">Back home</a></nav>
+  </header>
+
+  <main class="contact-page">
+    <p class="eyebrow">CONTACT</p>
+    <h1>Say Hi.</h1>
+    <p class="contact-intro">Have a question, an idea, or something worth thinking through?</p>
+
+    <form class="contact-form" action="mailto:hello@desmondkhoo.com" method="post" enctype="text/plain">
+      <label>
+        <span>Name</span>
+        <input type="text" name="name" required>
+      </label>
+      <label>
+        <span>Email</span>
+        <input type="email" name="email" required>
+      </label>
+      <label>
+        <span>Message</span>
+        <textarea name="message" rows="7" required></textarea>
+      </label>
+      <button type="submit">Send message ↗</button>
+    </form>
+  </main>
+</body>
+</html>
