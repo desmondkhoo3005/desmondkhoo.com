@@ -1,0 +1,301 @@
+*{box-sizing:border-box}
+:root{
+  --bg:#0c0e0c;
+  --panel:#111411;
+  --ink:#f2efe7;
+  --muted:#96988f;
+  --line:#292d29;
+  --gold:#c7a35b;
+}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"DM Sans",sans-serif;
+}
+a{color:inherit;text-decoration:none}
+.site-header{
+  position:absolute;
+  inset:0 0 auto 0;
+  z-index:10;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:26px 4vw;
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+.brand,.site-header nav a{
+  font-size:10px;
+  letter-spacing:.17em;
+  font-weight:600;
+}
+.site-header nav{
+  display:flex;
+  gap:30px;
+}
+.hero{
+  min-height:100vh;
+  padding:135px 5vw 55px;
+  display:grid;
+  grid-template-columns:1fr 340px;
+  grid-template-rows:auto 1fr auto;
+  gap:30px;
+  position:relative;
+  overflow:hidden;
+  border-bottom:1px solid var(--line);
+}
+.eyebrow,.section-title,.decision-type{
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:.18em;
+}
+.eyebrow{
+  color:var(--muted);
+  margin:0;
+}
+.hero h1{
+  grid-column:1 / 3;
+  align-self:center;
+  margin:0;
+  max-width:1180px;
+  font-family:"Newsreader",serif;
+  font-size:clamp(6rem,13vw,13.5rem);
+  font-weight:400;
+  line-height:.76;
+  letter-spacing:-.065em;
+}
+.hero h1 em{
+  color:var(--gold);
+  font-weight:400;
+}
+.hero-note{
+  align-self:end;
+  justify-self:end;
+  margin:0;
+  color:#bdbfb7;
+  font-family:"Newsreader",serif;
+  font-size:1.45rem;
+  line-height:1.28;
+}
+.scroll-mark{
+  position:absolute;
+  bottom:38px;
+  left:5vw;
+  font-size:22px;
+  color:var(--gold);
+}
+.mission,.decisions,.principles,.about{
+  padding:9vw 5vw;
+  border-bottom:1px solid var(--line);
+}
+.mission{
+  display:grid;
+  grid-template-columns:70px 170px 1fr;
+  gap:40px;
+  min-height:88vh;
+  align-items:start;
+}
+.section-index{
+  color:var(--gold);
+  font-family:"Newsreader",serif;
+  font-size:18px;
+}
+.section-title{
+  color:var(--muted);
+  margin-top:5px;
+}
+.mission h2{
+  margin:0;
+  font-family:"Newsreader",serif;
+  font-size:clamp(4.5rem,8vw,9rem);
+  font-weight:400;
+  line-height:.86;
+  letter-spacing:-.055em;
+}
+.mission h2 span{color:var(--gold)}
+.section-head{
+  display:grid;
+  grid-template-columns:70px 170px 1fr;
+  gap:40px;
+  margin-bottom:80px;
+}
+.decisions{background:var(--panel)}
+.decision{
+  display:grid;
+  grid-template-columns:90px minmax(0,1fr) auto;
+  gap:40px;
+  align-items:end;
+  padding:55px 0;
+  border-top:1px solid var(--line);
+}
+.decision:last-child{border-bottom:1px solid var(--line)}
+.decision-number{
+  align-self:start;
+  color:var(--gold);
+  font-family:"Newsreader",serif;
+  font-size:22px;
+}
+.decision-copy{max-width:980px}
+.decision-type{
+  margin:0 0 18px;
+  color:var(--muted);
+}
+.decision h3{
+  margin:0;
+  font-family:"Newsreader",serif;
+  font-size:clamp(3.4rem,6vw,7rem);
+  font-weight:400;
+  line-height:.88;
+  letter-spacing:-.05em;
+}
+.decision-description{
+  max-width:620px;
+  margin:28px 0 0;
+  color:#aeb0a8;
+  line-height:1.65;
+}
+.decision-link{
+  white-space:nowrap;
+  padding-bottom:4px;
+  border-bottom:1px solid var(--gold);
+  font-size:11px;
+}
+.featured{
+  padding-top:0;
+}
+.principle-row{
+  display:grid;
+  grid-template-columns:95px minmax(0,1fr) 340px;
+  gap:40px;
+  align-items:center;
+  padding:42px 0;
+  border-top:1px solid var(--line);
+  position:relative;
+}
+.principle-row:last-child{border-bottom:1px solid var(--line)}
+.principle-letter{
+  color:var(--gold);
+  font-family:"Newsreader",serif;
+  font-size:20px;
+}
+.principle-row h3{
+  margin:0;
+  font-family:"Newsreader",serif;
+  font-size:clamp(2.8rem,4.4vw,5rem);
+  font-weight:400;
+  letter-spacing:-.035em;
+}
+.principle-row p{
+  margin:0;
+  color:var(--muted);
+  line-height:1.55;
+}
+.repair:after{
+  content:"";
+  position:absolute;
+  top:-15%;
+  left:69%;
+  width:1px;
+  height:130%;
+  transform:rotate(10deg);
+  background:linear-gradient(transparent,var(--gold),transparent);
+  opacity:.55;
+}
+.about{
+  background:#090b09;
+}
+.about-grid{
+  display:grid;
+  grid-template-columns:1.2fr .6fr;
+  gap:9vw;
+}
+.about h2{
+  margin:0;
+  font-family:"Newsreader",serif;
+  font-size:clamp(4.3rem,7vw,8rem);
+  font-weight:400;
+  line-height:.88;
+  letter-spacing:-.05em;
+}
+.about-copy{
+  padding-top:10px;
+  font-family:"Newsreader",serif;
+  font-size:1.45rem;
+  line-height:1.5;
+}
+.about-small{
+  margin-top:55px;
+  color:var(--muted);
+  font-size:1rem;
+}
+.about-copy a{
+  display:inline-block;
+  margin-top:28px;
+  padding-bottom:4px;
+  border-bottom:1px solid var(--gold);
+  font-family:"DM Sans",sans-serif;
+  font-size:11px;
+}
+footer{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  align-items:center;
+  padding:32px 4vw;
+  color:var(--muted);
+  font-size:9px;
+  letter-spacing:.14em;
+}
+footer p:nth-child(2){text-align:center}
+footer div{
+  justify-self:end;
+  display:flex;
+  gap:22px;
+}
+@media (max-width:800px){
+  .site-header{padding:22px 20px}
+  .site-header nav{gap:14px}
+  .site-header nav a{font-size:9px}
+  .hero{
+    min-height:100svh;
+    padding:120px 22px 50px;
+    grid-template-columns:1fr;
+  }
+  .hero h1{
+    grid-column:1;
+    font-size:22vw;
+  }
+  .hero-note{
+    justify-self:start;
+    margin-top:30px;
+  }
+  .mission{
+    grid-template-columns:40px 1fr;
+    min-height:auto;
+    padding:95px 22px;
+  }
+  .mission .section-title{grid-column:2}
+  .mission h2{grid-column:1 / 3}
+  .section-head{
+    grid-template-columns:40px 1fr;
+    margin-bottom:55px;
+  }
+  .decisions,.principles,.about{padding:95px 22px}
+  .decision{
+    grid-template-columns:42px 1fr;
+    align-items:start;
+  }
+  .decision-link{grid-column:2;margin-top:10px;width:max-content}
+  .principle-row{
+    grid-template-columns:40px 1fr;
+  }
+  .principle-row p{grid-column:2}
+  .about-grid{grid-template-columns:1fr}
+  footer{
+    grid-template-columns:1fr;
+    gap:12px;
+    padding:26px 20px;
+  }
+  footer p:nth-child(2){text-align:left}
+  footer div{justify-self:start}
+}
