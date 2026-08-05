@@ -1,0 +1,20 @@
+---
+import { getCollection, render } from 'astro:content';
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('positions', ({ data }) => !data.draft);
+  return entries.map((entry) => ({ params: { id: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const meta = [
+  `Conviction: ${entry.data.conviction}`,
+  entry.data.pubDate ? `Published: ${entry.data.pubDate.toLocaleDateString('en-SG')}` : '',
+  entry.data.updatedDate ? `Revised: ${entry.data.updatedDate.toLocaleDateString('en-SG')}` : ''
+].filter(Boolean);
+---
+<ArticleLayout title={entry.data.title} description={entry.data.description} type="Position" category={entry.data.category} meta={meta}>
+  <Content />
+</ArticleLayout>

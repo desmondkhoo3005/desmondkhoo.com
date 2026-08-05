@@ -1,0 +1,35 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ContentList from '../../components/ContentList.astro';
+
+const entries = (await getCollection('guides', ({ data }) => !data.draft))
+  .sort((a, b) => {
+    const seriesCompare = a.data.series.localeCompare(b.data.series);
+    if (seriesCompare !== 0) return seriesCompare;
+    return (a.data.seriesOrder ?? 999) - (b.data.seriesOrder ?? 999);
+  });
+const items = entries.map((entry) => ({
+  href: `/library/${entry.id}/`,
+  category: entry.data.series,
+  title: entry.data.title,
+  description: entry.data.description,
+  meta: entry.data.lastReviewed ? `Reviewed ${entry.data.lastReviewed.toLocaleDateString('en-SG', { month: 'short', year: 'numeric' })}` : 'Review pending'
+}));
+---
+<BaseLayout title="Library — Desmond Khoo" description="Structured guides to finance, F.I.R.E., DeFi, blockchain, risk and other subjects worth understanding.">
+  <main>
+    <section class="page-hero">
+      <div class="shell">
+        <p class="eyebrow">What I have learned</p>
+        <h1>Library.</h1>
+        <p class="lede">A rebuilt home for my educational writing. Older InLeo pieces are being audited, merged, rewritten and reviewed before appearing here.</p>
+      </div>
+    </section>
+    <section class="section">
+      <div class="shell">
+        <ContentList items={items} emptyMessage="The InLeo archive is currently being inventoried. Only reviewed and rewritten guides will appear publicly." />
+      </div>
+    </section>
+  </main>
+</BaseLayout>

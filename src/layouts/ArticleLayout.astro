@@ -1,0 +1,25 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  type: 'Decision' | 'Position' | 'Guide';
+  category: string;
+  meta?: string[];
+}
+const { title, description, type, category, meta = [] } = Astro.props;
+---
+<BaseLayout title={`${title} — Desmond Khoo`} description={description}>
+  <main class="article-shell">
+    <header class="article-header">
+      <p class="eyebrow">{type} · {category}</p>
+      <h1>{title}</h1>
+      <p class="article-deck">{description}</p>
+      {meta.length > 0 && <div class="article-meta">{meta.map((item) => <span>{item}</span>)}</div>}
+    </header>
+    <article class="article-body">
+      <slot />
+    </article>
+  </main>
+</BaseLayout>

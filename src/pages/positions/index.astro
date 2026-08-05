@@ -1,0 +1,31 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ContentList from '../../components/ContentList.astro';
+
+const entries = (await getCollection('positions', ({ data }) => !data.draft))
+  .sort((a, b) => (b.data.pubDate?.valueOf() ?? 0) - (a.data.pubDate?.valueOf() ?? 0));
+const items = entries.map((entry) => ({
+  href: `/positions/${entry.id}/`,
+  category: entry.data.category,
+  title: entry.data.title,
+  description: entry.data.description,
+  meta: `Conviction: ${entry.data.conviction}`
+}));
+---
+<BaseLayout title="Positions — Desmond Khoo" description="What I believe—and why. Arguments with their counterarguments and limits left visible.">
+  <main>
+    <section class="page-hero">
+      <div class="shell">
+        <p class="eyebrow">What I believe</p>
+        <h1>Positions.</h1>
+        <p class="lede">Opinions become useful only when the argument, strongest objection and conditions for changing one’s mind are visible.</p>
+      </div>
+    </section>
+    <section class="section">
+      <div class="shell">
+        <ContentList items={items} emptyMessage="Positions are being developed. Hot takes do not make the archive until the reasoning survives scrutiny." />
+      </div>
+    </section>
+  </main>
+</BaseLayout>

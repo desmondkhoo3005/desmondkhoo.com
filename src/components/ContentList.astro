@@ -1,0 +1,27 @@
+---
+interface Item {
+  href: string;
+  category: string;
+  title: string;
+  description: string;
+  meta?: string;
+}
+interface Props { items: Item[]; emptyMessage: string; }
+const { items, emptyMessage } = Astro.props;
+---
+{items.length ? (
+  <div class="content-list">
+    {items.map((item) => (
+      <a class="content-row" href={item.href}>
+        <p class="eyebrow">{item.category}</p>
+        <div>
+          <h2>{item.title}</h2>
+          <p>{item.description}</p>
+        </div>
+        <div class="row-meta">{item.meta}</div>
+      </a>
+    ))}
+  </div>
+) : (
+  <div class="empty-state">{emptyMessage}</div>
+)}

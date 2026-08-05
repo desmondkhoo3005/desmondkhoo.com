@@ -1,0 +1,11 @@
+original_title,legacy_id,proposed_type,proposed_series,proposed_title,status,notes
+What is Finance?,2.1.2.1,Guide,Finance Foundations,What Is Finance?,Rewrite,"Expand personal/corporate/public finance and update examples"
+History of Money,2.1.2.1,Guide,Finance Foundations,A Short History of Money,Rewrite,"Fact-check chronology and improve narrative"
+Risk,2.1.1.2,Guide,Finance Foundations,Risk: From Avoidance to Calculated Exposure,Rewrite,"Strong conceptual piece"
+Sparking a F.I.R.E.,2.1.1.1,Guide,Understanding F.I.R.E.,Sparking a F.I.R.E.,Rewrite,"Update for current personal view"
+Welcome to DeFi,2.7.2.1,Guide,DeFi Foundations,What DeFi Is—and What It Is Not,Merge,"Merge with Blockchain Technology overlap"
+Blockchain Technology,2.7.2.1,Guide,DeFi Foundations,How Blockchain Records Ownership,Merge,"Remove obsolete project references"
+What about Blockchain Layers?,2.7.2.1,Guide,DeFi Foundations,Why Blockchains Need Layers,Rewrite,"Update terminology and examples"
+Public vs Private Keys Digital Signing,2.7.2.1,Guide,DeFi Foundations,Wallets Public Keys and Private Keys,Rewrite,"Clarify wallet/account distinction"
+Cryptocurrency,2.7.2.2,Guide,DeFi Foundations,Cryptocurrency: Tokens Economics and Ownership,Rewrite,"Review tokenomics claims"
+Find Thyself,2.2.1.2,Position or Guide,Life Notes,Find Thyself,Review,"Choose content type after rereading original"
