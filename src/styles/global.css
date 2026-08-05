@@ -284,13 +284,14 @@ button, input, textarea { font: inherit; }
     max-width: none;
   }
 
-  .hero-note {
-    justify-self: start;
-    align-self: end;
-    margin-top: 45px;
-    max-width: 280px;
-    font-size: 1.2rem;
-  }
+.hero-note {
+  justify-self: start;
+  align-self: end;
+  margin-top: 45px;
+  margin-bottom: 45px;
+  max-width: 280px;
+  font-size: 1.2rem;
+}
 
   .scroll-mark {
     left: 22px;
