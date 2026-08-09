@@ -4,6 +4,7 @@ description: "How positioning, downside limits and expected returns turn pure ri
 category: "Risk"
 draft: true
 series: "Finance Foundations"
+subject: "finance"
 seriesOrder: 3
 migrationStatus: "rewrite"
 legacyId: "2.1.1.2"

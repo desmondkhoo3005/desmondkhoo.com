@@ -43,9 +43,33 @@ const guides = defineCollection({
     ...baseFields,
     series: z.string(),
     seriesOrder: z.number().int().positive().optional(),
+
+    // Library catalogue relationship.
+    // Optional during migration so existing guides do not break.
+    subject: z.string().optional(),
+    subjectOrder: z.number().int().positive().optional(),
+    label: z.string().optional(),
+    readingTime: z.number().int().positive().optional(),
+
     lastReviewed: z.coerce.date().optional(),
     migrationStatus: z.enum(['rewrite', 'merge', 'republish', 'archive', 'drop']).default('rewrite')
   })
 });
 
-export const collections = { decisions, positions, guides };
+const librarySubjects = defineCollection({
+  loader: glob({ base: './src/content/library-subjects', pattern: '**/*.md' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    headline: z.string().optional(),
+    order: z.number().int().positive(),
+    draft: z.boolean().default(true)
+  })
+});
+
+export const collections = {
+  decisions,
+  positions,
+  guides,
+  librarySubjects
+};

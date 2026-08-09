@@ -1,20 +1,170 @@
 ---
 import { getCollection, render } from 'astro:content';
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
 
 export async function getStaticPaths() {
-  const entries = await getCollection('guides', ({ data }) => !data.draft);
-  return entries.map((entry) => ({ params: { id: entry.id }, props: { entry } }));
+  const guides = await getCollection('guides', ({ data }) => !data.draft);
+  const subjects = await getCollection('librarySubjects', ({ data }) => !data.draft);
+
+  const publishedSubjectIds = new Set(
+    guides
+      .map((guide) => guide.data.subject)
+      .filter((subject): subject is string => Boolean(subject))
+  );
+
+  const guidePaths = guides.map((entry) => ({
+    params: { id: entry.id },
+    props: {
+      pageType: 'guide' as const,
+      entry
+    }
+  }));
+
+  const subjectPaths = subjects
+    .filter((subject) => publishedSubjectIds.has(subject.id))
+    .map((subject) => ({
+      params: { id: subject.id },
+      props: {
+        pageType: 'subject' as const,
+        subject
+      }
+    }));
+
+  return [...guidePaths, ...subjectPaths];
 }
 
-const { entry } = Astro.props;
-const { Content } = await render(entry);
-const meta = [
-  `Series: ${entry.data.series}`,
-  entry.data.originalPublished ? `Originally published: ${entry.data.originalPublished.toLocaleDateString('en-SG', { month: 'short', year: 'numeric' })}` : '',
-  entry.data.lastReviewed ? `Reviewed: ${entry.data.lastReviewed.toLocaleDateString('en-SG', { month: 'short', year: 'numeric' })}` : ''
-].filter(Boolean);
+const props = Astro.props;
+
+if (props.pageType === 'guide') {
+  const { entry } = props;
+  const { Content } = await render(entry);
+
+  const meta = [
+    `Series: ${entry.data.series}`,
+    entry.data.originalPublished
+      ? `Originally published: ${entry.data.originalPublished.toLocaleDateString('en-SG', {
+          month: 'short',
+          year: 'numeric'
+        })}`
+      : '',
+    entry.data.lastReviewed
+      ? `Reviewed: ${entry.data.lastReviewed.toLocaleDateString('en-SG', {
+          month: 'short',
+          year: 'numeric'
+        })}`
+      : ''
+  ].filter(Boolean);
+
+  Astro.locals.libraryPage = {
+    type: 'guide',
+    entry,
+    Content,
+    meta
+  };
+} else {
+  const { subject } = props;
+
+  const guides = (await getCollection(
+    'guides',
+    ({ data }) => !data.draft && data.subject === subject.id
+  )).sort(
+    (a, b) =>
+      (a.data.subjectOrder ?? 999) - (b.data.subjectOrder ?? 999)
+  );
+
+  Astro.locals.libraryPage = {
+    type: 'subject',
+    subject,
+    guides
+  };
+}
+
+const page = Astro.locals.libraryPage;
 ---
-<ArticleLayout title={entry.data.title} description={entry.data.description} type="Guide" category={entry.data.category} meta={meta}>
-  <Content />
-</ArticleLayout>
+
+{
+  page.type === 'guide' ? (
+    <ArticleLayout
+      title={page.entry.data.title}
+      description={page.entry.data.description}
+      type="Guide"
+      category={page.entry.data.category}
+      meta={page.meta}
+    >
+      <page.Content />
+    </ArticleLayout>
+  ) : (
+    <BaseLayout
+      title={`${page.subject.data.title} — Library — Desmond Khoo`}
+      description={page.subject.data.description}
+    >
+      <main>
+        <section class="page-hero library-subject-hero">
+          <div class="shell">
+            <p class="eyebrow">Library / {page.subject.data.title}</p>
+
+            <h1>{page.subject.data.title}</h1>
+
+            <div class="library-subject-intro">
+              {page.subject.data.headline && (
+                <p class="library-subject-headline">
+                  {page.subject.data.headline}
+                </p>
+              )}
+
+              <p class="library-subject-description">
+                {page.subject.data.description}
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section library-reading-section">
+          <div class="shell">
+            <p class="eyebrow library-reading-heading">
+              In this collection
+            </p>
+
+            {page.guides.length ? (
+              <div class="library-reading-list">
+                {page.guides.map((guide) => (
+                  <a
+                    class="library-reading-row"
+                    href={`/library/${guide.id}/`}
+                  >
+                    <div class="library-reading-meta">
+                      {guide.data.label && (
+                        <span>{guide.data.label}</span>
+                      )}
+
+                      {guide.data.readingTime && (
+                        <span>{guide.data.readingTime} min</span>
+                      )}
+                    </div>
+
+                    <div class="library-reading-copy">
+                      <h2>{guide.data.title}</h2>
+                      <p>{guide.data.description}</p>
+                    </div>
+
+                    <span
+                      class="library-reading-arrow"
+                      aria-hidden="true"
+                    >
+                      ↗
+                    </span>
+                  </a>
+                ))}
+              </div>
+            ) : (
+              <div class="empty-state">
+                No published pieces in this collection yet.
+              </div>
+            )}
+          </div>
+        </section>
+      </main>
+    </BaseLayout>
+  )
+}

@@ -4,6 +4,7 @@ description: "A clear introduction to personal, corporate and public finance—a
 category: "Finance"
 draft: true
 series: "Finance Foundations"
+subject: "finance"
 seriesOrder: 1
 migrationStatus: "rewrite"
 legacyId: "2.1.2.1"
