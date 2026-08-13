@@ -9,7 +9,6 @@ seriesOrder: 1
 subject: "finance"
 subjectOrder: 1
 label: "START HERE"
-pubDate: 2026-08-10
 readingTime: 6
 lastReviewed: 2026-08-10
 migrationStatus: "rewrite"
@@ -326,6 +325,8 @@ That is why I want to start the Finance Library here.
 Before asking how to make more money, invest it better or accumulate more wealth, I want to ask a more basic question:
 
 > **What do I actually want the money for?**
+
+Money gives us the mechanism for exchange. [Finance](/library/what-is-finance/) begins when we start deciding what that money should do across people, purposes, risk and time.
 
 ---
 

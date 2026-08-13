@@ -9,8 +9,6 @@ seriesOrder: 2
 subject: "finance"
 subjectOrder: 2
 label: "FOUNDATION"
-pubDate: 2026-08-10
-image: "/images/library/what-is-finance-map.png"
 readingTime: 9
 lastReviewed: 2026-08-10
 migrationStatus: "rewrite"
@@ -22,7 +20,7 @@ tags: ["finance", "money", "debt", "banking", "personal finance", "corporate fin
 
 At its simplest, Finance is about managing money.
 
-In the previous guide, I wrote about what money is, why price is not the same as value, and why money is really just a tool we use to transact.
+In the previous guide, I wrote about [what money is](/library/what-is-money-really/), why price is not the same as value, and why money is really just a tool we use to transact.
 
 So the next question is obvious:
 
