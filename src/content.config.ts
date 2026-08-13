@@ -5,6 +5,7 @@ import { z } from 'astro/zod';
 const baseFields = {
   title: z.string(),
   description: z.string(),
+  image: z.string().optional(),
   pubDate: z.coerce.date().optional(),
   updatedDate: z.coerce.date().optional(),
   draft: z.boolean().default(true),

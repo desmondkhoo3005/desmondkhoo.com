@@ -9,6 +9,8 @@ seriesOrder: 2
 subject: "finance"
 subjectOrder: 2
 label: "FOUNDATION"
+pubDate: 2026-08-10
+image: "/images/library/what-is-finance-map.png"
 readingTime: 9
 lastReviewed: 2026-08-10
 migrationStatus: "rewrite"

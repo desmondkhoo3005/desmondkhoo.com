@@ -7,14 +7,55 @@ interface Props {
   title?: string;
   description?: string;
   image?: string;
+  pageType?: 'website' | 'article';
+  publishedDate?: Date;
+  modifiedDate?: Date;
+  authorName?: string;
 }
 
 const {
   title = 'Desmond Khoo — Better Judgment',
   description = 'An independent archive of better judgment: decisions, positions and practical guides.',
-  image = '/og-image.png'
+  image = '/og-image.png',
+  pageType = 'website',
+  publishedDate,
+  modifiedDate,
+  authorName = 'Desmond Khoo'
 } = Astro.props;
+
 const canonical = new URL(Astro.url.pathname, Astro.site);
+const absoluteImage = new URL(image, Astro.site);
+
+const websiteStructuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Desmond Khoo',
+  url: new URL('/', Astro.site).toString(),
+  description: 'An independent archive of better judgment: decisions, positions and practical guides.',
+  author: {
+    '@type': 'Person',
+    name: authorName,
+    url: new URL('/about/', Astro.site).toString()
+  }
+};
+
+const articleStructuredData = pageType === 'article'
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: title.replace(/ — Desmond Khoo$/, ''),
+      description,
+      url: canonical.toString(),
+      author: {
+        '@type': 'Person',
+        name: authorName,
+        url: new URL('/about/', Astro.site).toString()
+      },
+      ...(publishedDate ? { datePublished: publishedDate.toISOString() } : {}),
+      ...(modifiedDate ? { dateModified: modifiedDate.toISOString() } : {}),
+      ...(image !== '/og-image.png' ? { image: absoluteImage.toString() } : {})
+    }
+  : null;
 ---
 <!doctype html>
 <html lang="en">
@@ -25,15 +66,33 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="theme-color" content="#0b0d0b" />
-    <meta property="og:type" content="website" />
+
+    <meta property="og:type" content={pageType} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={new URL(image, Astro.site)} />
+    <meta property="og:image" content={absoluteImage} />
+
+    {pageType === 'article' && publishedDate && (
+      <meta property="article:published_time" content={publishedDate.toISOString()} />
+    )}
+    {pageType === 'article' && modifiedDate && (
+      <meta property="article:modified_time" content={modifiedDate.toISOString()} />
+    )}
+    {pageType === 'article' && (
+      <meta property="article:author" content={authorName} />
+    )}
+
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={new URL(image, Astro.site)} />
+    <meta name="twitter:image" content={absoluteImage} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(websiteStructuredData)} />
+    {articleStructuredData && (
+      <script type="application/ld+json" set:html={JSON.stringify(articleStructuredData)} />
+    )}
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet" />

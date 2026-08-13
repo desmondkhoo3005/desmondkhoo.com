@@ -374,7 +374,7 @@ button, input, textarea { font: inherit; }
 }
 .article-deck { margin: 0; max-width: 760px; color: #c5c7bf; font-family: "Newsreader", Georgia, serif; font-size: 1.35rem; line-height: 1.48; }
 .article-meta { display: flex; flex-wrap: wrap; gap: 10px 24px; margin-top: 35px; color: var(--muted); font-size: .72rem; }
-.article-body { max-width: 760px; margin: 0 auto; padding-top: 70px; font-family: "Newsreader", Georgia, serif; font-size: clamp(1.2rem, 1.55vw, 1.42rem); line-height: 1.7; }
+.article-body { width: min(100%, 760px); max-width: 760px; margin-left: 0 !important; margin-right: auto !important; padding-top: 70px; font-family: "Newsreader", Georgia, serif; font-size: clamp(1.2rem, 1.55vw, 1.42rem); line-height: 1.7; }
 .article-body h2 { margin: 2.5em 0 .7em; font-size: 2.25em; line-height: 1; letter-spacing: -.04em; font-weight: 400; }
 .article-body h3 { margin: 2em 0 .6em; font-size: 1.5em; font-weight: 400; }
 .article-body p { margin: 0 0 1.35em; }
@@ -763,7 +763,10 @@ button, input, textarea { font: inherit; }
   }
 
   .article-body {
+    width: 100%;
     max-width: none;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
     padding-top: 48px;
     font-size: 1.16rem;
     line-height: 1.68;

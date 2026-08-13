@@ -42,6 +42,13 @@ if (props.pageType === 'guide') {
 
   const meta = [
     `Series: ${entry.data.series}`,
+    entry.data.pubDate
+      ? `Published: ${entry.data.pubDate.toLocaleDateString('en-SG', {
+          day: 'numeric',
+          month: 'short',
+          year: 'numeric'
+        })}`
+      : '',
     entry.data.originalPublished
       ? `Originally published: ${entry.data.originalPublished.toLocaleDateString('en-SG', {
           month: 'short',
@@ -91,6 +98,9 @@ const page = Astro.locals.libraryPage;
       type="Guide"
       category={page.entry.data.category}
       meta={page.meta}
+      image={page.entry.data.image}
+      pubDate={page.entry.data.pubDate}
+      updatedDate={page.entry.data.updatedDate ?? page.entry.data.lastReviewed}
     >
       <page.Content />
     </ArticleLayout>

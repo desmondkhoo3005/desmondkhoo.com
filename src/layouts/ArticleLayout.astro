@@ -7,10 +7,30 @@ interface Props {
   type: 'Decision' | 'Position' | 'Guide';
   category: string;
   meta?: string[];
+  image?: string;
+  pubDate?: Date;
+  updatedDate?: Date;
 }
-const { title, description, type, category, meta = [] } = Astro.props;
+
+const {
+  title,
+  description,
+  type,
+  category,
+  meta = [],
+  image,
+  pubDate,
+  updatedDate
+} = Astro.props;
 ---
-<BaseLayout title={`${title} — Desmond Khoo`} description={description}>
+<BaseLayout
+  title={`${title} — Desmond Khoo`}
+  description={description}
+  image={image}
+  pageType="article"
+  publishedDate={pubDate}
+  modifiedDate={updatedDate}
+>
   <main class="article-shell">
     <header class="article-header">
       <p class="eyebrow">{type} · {category}</p>

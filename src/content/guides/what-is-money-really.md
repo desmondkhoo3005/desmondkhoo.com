@@ -9,6 +9,7 @@ seriesOrder: 1
 subject: "finance"
 subjectOrder: 1
 label: "START HERE"
+pubDate: 2026-08-10
 readingTime: 6
 lastReviewed: 2026-08-10
 migrationStatus: "rewrite"
