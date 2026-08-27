@@ -442,6 +442,40 @@ button, input, textarea { font: inherit; }
   color: var(--gold);
 }
 
+
+/* ARTICLE SUPPORT */
+
+.support-kopi {
+  width: min(100%, 760px);
+  max-width: 760px;
+  margin: 56px 0 0;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+
+.support-kopi p {
+  margin: 0;
+  color: var(--muted);
+  font-family: "DM Sans", Arial, sans-serif;
+  font-size: .82rem;
+  line-height: 1.6;
+}
+
+.support-kopi a {
+  display: inline-block;
+  margin-left: .25em;
+  padding-bottom: 3px;
+  border-bottom: 1px solid var(--gold);
+  color: var(--gold);
+  font-weight: 500;
+  transition: color .2s ease;
+}
+
+.support-kopi a:hover,
+.support-kopi a:focus-visible {
+  color: var(--gold);
+}
+
 .contact-form { max-width: 850px; border-top: 1px solid var(--line); margin-top: 55px; }
 .contact-form label { display: grid; grid-template-columns: 150px 1fr; gap: 20px; padding: 28px 0; border-bottom: 1px solid var(--line); }
 .contact-form label span { padding-top: 10px; color: var(--muted); font-size: .67rem; letter-spacing: .16em; text-transform: uppercase; }
@@ -802,6 +836,11 @@ button, input, textarea { font: inherit; }
     font-size: 1.7rem;
   }
 
+
+  .support-kopi {
+    margin-top: 44px;
+    padding-top: 22px;
+  }
 
   /* CONTACT */
   .contact-form label {
