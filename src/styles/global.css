@@ -487,6 +487,15 @@ button, input, textarea { font: inherit; }
 .footer-inner { display: grid; grid-template-columns: 1fr 1fr 1fr; align-items: center; }
 .footer-inner > :nth-child(2) { text-align: center; }
 .footer-links { justify-self: end; display: flex; gap: 22px; }
+.footer-links a {
+  position: relative;
+  display: inline-block;
+}
+.footer-links a::after {
+  content: "";
+  position: absolute;
+  inset: -16px -8px;
+}
 
 @media (max-width: 850px) {
 
